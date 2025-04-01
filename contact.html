@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Me</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="styles.css"> 
+
+  <style>
+    /* General Styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      background: linear-gradient(to right, #121212, #1e1e1e);
+      color: #fff;
+    }
+
+    /* Navbar */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 50px;
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(10px);
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .logo img {
+      width: 50px;
+      height: auto;
+    }
+
+    .nav-links {
+      list-style: none;
+      display: flex;
+    }
+
+    .nav-links li {
+      margin: 0 15px;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: #fff;
+      font-size: 18px;
+      transition: 0.3s;
+    }
+
+    .nav-links a:hover {
+      color: #04AA6D;
+    }
+
+    /* Form Container - Glassmorphism */
+    .container {
+      width: 50%;
+      margin: 120px auto;
+      padding: 40px;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(15px);
+      border-radius: 15px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+      text-align: center;
+    }
+
+    .container h2 {
+      margin-bottom: 20px;
+      font-size: 24px;
+      color: #04AA6D;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border-radius: 8px;
+      border: none;
+      outline: none;
+      font-size: 16px;
+    }
+
+    input, select {
+      background: rgba(255, 255, 255, 0.2);
+      color: #fff;
+    }
+
+    textarea {
+      height: 120px;
+    }
+
+    input::placeholder, textarea::placeholder {
+      color: #ddd;
+    }
+
+    input[type="submit"] {
+      background: #04AA6D;
+      color: white;
+      font-size: 18px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    input[type="submit"]:hover {
+      background: #45a049;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: rgba(0, 0, 0, 0.9);
+      position: relative;
+      bottom: 0;
+      width: 100%;
+    }
+
+    .social-links a {
+      color: #fff;
+      margin: 0 10px;
+      font-size: 22px;
+      transition: 0.3s;
+    }
+
+    .social-links a:hover {
+      color: #04AA6D;
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <a href="index.html#home" class="logo"><img src="loogo.png" alt="SD"></a>
+    <ul class="nav-links">
+      <li><a href="index.html#home">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="index.html#skills">Skills</a></li>
+      <li><a href="index.html#education">Education</a></li>
+      <li><a href="#Certify">Certifications</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- Form Container -->
+  <div class="container">
+    <h2>Contact Me</h2>
+    <form action="https://api.web3forms.com/submit" method="POST">
+      <input type="hidden" name="access_key" value="7f003844-62a9-4710-8794-2dba98e0029e">
+
+      <input type="text" id="fname" name="firstname" placeholder="First Name" required>
+      <input type="text" id="lname" name="lastname" placeholder="Last Name" required>
+      <input type="text" id="pnumber" name="phonenumber" placeholder="Phone Number" required>
+
+      <select id="country" name="country" required>
+        <option value="" disabled selected>Select your country</option>
+        <option value="india">India</option>
+        <option value="usa">USA</option>
+        <option value="canada">Canada</option>
+        <option value="australia">Australia</option>
+        <option value="uk">UK</option>
+        <option value="germany">Germany</option>
+      </select>
+
+      <textarea id="subject" name="subject" placeholder="Write your message..." required></textarea>
+
+      <input type="submit" value="Send Message">
+    </form>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2024 Saidatta. All rights reserved.</p>
+    <div class="social-links">
+      <a href="https://www.linkedin.com/in/v-v-satya-sai-datta-manikanta-gowthu-41709b291/"><i class="fa-brands fa-linkedin"></i></a>
+      <a href="https://github.com/gowthusaidatta"><i class="fa-brands fa-github"></i></a>
+      <a href="https://www.instagram.com/crazyboy_datta?igsh=MWx6cHE0Z2k1cnptdA=="><i class="fa-brands fa-instagram"></i></a>
+    </div>
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Me</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="styles.css"> <!-- Linking your dark-themed CSS -->
+ <head>
+  <title>
+   About Me
+  </title>
+  <style>
+   body {
+            margin: 0;
+            font-family:'Times New Roman', Times, serif;
+        }
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            height: 100vh;
+            padding: 3rem;
+        }
+        .left {
+            background-color: #2ecc71;
+            color: black;
+            padding: 50px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .left h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+        .left p {
+            font-style: italic;
+            font-size: 18px;
+            line-height: 1.6;
+        }
+        .right {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 50px;
+        }
+        .right img {
+            border-radius: 50%;
+            width: 300px;
+            height: 300px;
+            object-fit: cover;
+        }
+        .right p {
+            font-size: 18px;
+            text-align: center;
+            margin-top: 20px;
+            line-height: 1.6;
+        }
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+            .left, .right {
+                flex: none;
+                width: 100%;
+                padding: 20px;
+            }
+            .right img {
+                width: 200px;
+                height: 200px;
+            }
+        }
+  </style>
+ </head>
+ <body>
+  <!-- Navigation -->
+  <nav class="navbar">
+    <a href="#home" class="logo"><img href="index.html#home" src="https://raw.githubusercontent.com/gowthusaidatta/codesoft/main/loogo.png" alt="SD"></a>
+    <ul class="nav-links">
+      <li><a href="index.html#home">Home</a></li>
+      <li><a href="about2.html">About</a></li>
+      <li><a href="index.html#skills">Skills</a></li>
+      <li><a href="index.html#education">Education</a></li>
+      <li><a href="#Certify">Certifications</a></li>
+      <li><a href="contact.html">Contact Us</a></li>
+    </ul>
+  </nav>
+  <div class="container">
+   <div class="left">
+    <h1>
+     About Me
+    </h1>
+    <p>
+      Hello! I'm <span class="highlight">V V SATYA SAI DATTA MANIKANTA </span>, a dedicated Computer Science Engineering (IoT) student at Aditya college of enginerring and technology.</p>
+    <p>I specialize in <span id="element"></span></p>
+    
+    <p>
+      I'm a passionate developer and team leader quality with Knowlege on Python, Java, C, and Basic JavaScript. I love building innovative web applications, managing projects efficiently, and leading teams toward success. With a creative edge in  <span class="highlight">Canva design</span>, I bring ideas to life visually while ensuring smooth execution. From coding challenges to hackathons, I thrive in dynamic environments where creativity meets technology. 
+      Let’s collaborate and build something extraordinary! 🚀
+    </p>
+    <p>Let’s create something amazing together! 🚀</p>
+   </div>
+   <div class="right">
+    <img src="https://raw.githubusercontent.com/gowthusaidatta/codesoft/main/23MH1A4918.png" alt="Profile" class="profile-img">
+
+    <p>
+      "The only way to do great work is to love what you do." – Steve Jobs
+    </p>
+   </div>
+  </div>
+  
+  <footer>
+    <p>&copy; 2024 Saidatta. All rights reserved.</p>
+    <div class="social-links">
+      <a href="https://www.linkedin.com/in/v-v-satya-sai-datta-manikanta-gowthu-41709b291/"><i class="fa-brands fa-linkedin"></i></a>
+      <a href="https://github.com/gowthusaidatta"><i class="fa-brands fa-github"></i></a>
+      <a href="https://www.instagram.com/crazyboy_datta?igsh=MWx6cHE0Z2k1cnptdA=="><i class="fa-brands fa-instagram"></i></a>
+     
+    </div>
+  </footer>
+  <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
+  
+   <script>
+    var typed = new Typed('#element', {
+      strings: ['Web Development', 'IoT', 'Data Structures'],
+      typeSpeed: 25,
+    });
+  </script>
+ </body>
+</html>
