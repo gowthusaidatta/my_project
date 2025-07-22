@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>CodeSync Score Checker</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+    <style>
+        :root {
+            --primary: #6366f1; /* Indigo 500 */
+            --primary-dark: #4f46e5; /* Indigo 600 */
+            --secondary: #10b981; /* Emerald 500 */
+            --dark: #1e293b; /* Slate 800 */
+            --darker: #0f172a; /* Slate 900 */
+            --light: #f8fafc; /* Slate 50 */
+            --border-color: rgba(255, 255, 255, 0.15); /* Lighter border for elements */
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, var(--darker), var(--dark));
+            color: var(--light);
+            min-height: 100vh; /* Ensure full viewport height */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 1.5rem; /* Consistent padding */
+            overflow-x: hidden; /* Prevent horizontal scroll */
+        }
+        
+        .card {
+            background: rgba(15, 23, 42, 0.7); /* Translucent background */
+            backdrop-filter: blur(10px); /* Glassmorphism effect */
+            border: 1px solid var(--border-color);
+            border-radius: 1.5rem; /* More rounded corners */
+            box-shadow: 0 15px 40px 0 rgba(0, 0, 0, 0.45); /* Stronger, diffused shadow */
+            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1); /* Smooth transition */
+            position: relative;
+            overflow: hidden; /* Hide overflow for decorative elements */
+        }
+        
+        .card:hover {
+            transform: translateY(-8px) scale(1.01);
+            box-shadow: 0 25px 50px 0 rgba(0, 0, 0, 0.55);
+        }
+
+        /* Decorative blobs for card background */
+        .card::before, .card::after {
+            content: '';
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.15;
+            filter: blur(50px);
+            z-index: 0;
+        }
+
+        .card::before {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            width: 150px;
+            height: 150px;
+            top: -50px;
+            left: -50px;
+        }
+
+        .card::after {
+            background: linear-gradient(135deg, #ef4444, #eab308); /* Red to Amber */
+            width: 180px;
+            height: 180px;
+            bottom: -70px;
+            right: -70px;
+        }
+        
+        .input-field {
+            transition: all 0.3s ease;
+            background: rgba(30, 41, 59, 0.5);
+            border: 1px solid var(--border-color);
+            padding: 0.85rem 1.25rem;
+            border-radius: 0.75rem;
+            color: var(--light);
+            width: 100%;
+        }
+        
+        .input-field:focus {
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.3), inset 0 0 0 1px var(--primary);
+            border-color: var(--primary);
+            background: rgba(30, 41, 59, 0.7);
+        }
+        
+        .btn-primary {
+            background: linear-gradient(45deg, var(--primary), var(--primary-dark));
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            box-shadow: 0 5px 15px rgba(99, 102, 241, 0.4);
+            border: none; /* Remove default border */
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: 0 8px 25px rgba(99, 102, 241, 0.6);
+            background: linear-gradient(45deg, var(--primary-dark), var(--primary)); /* Reverse gradient on hover */
+        }
+        
+        .btn-primary:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 5px rgba(99, 102, 241, 0.2);
+        }
+        
+        .btn-secondary {
+            background: rgba(45, 57, 71, 0.8); /* Slightly lighter dark for secondary */
+            border: 1px solid var(--border-color);
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+        }
+        
+        .btn-secondary:hover {
+            background: rgba(45, 57, 71, 1);
+            transform: translateY(-3px) scale(1.01);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .btn-secondary:active {
+            transform: translateY(0);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+        
+        .spinner {
+            width: 24px;
+            height: 24px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-top-color: white;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        .progress-bar {
+            height: 8px; /* Thicker progress bar */
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 4px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            transition: width 0.4s ease-out; /* Smoother progress animation */
+        }
+        
+        .platform-tab {
+            transition: all 0.3s ease;
+            border-bottom: 2px solid transparent;
+            color: rgba(255, 255, 255, 0.6); /* Muted color for inactive tabs */
+            padding: 0.75rem 1.25rem;
+            font-weight: 600;
+        }
+        
+        .platform-tab.active {
+            border-bottom-color: var(--primary);
+            color: var(--primary);
+            transform: translateY(-2px);
+            box-shadow: 0 2px 0 var(--primary) inset; /* Subtle bottom shadow */
+        }
+
+        .platform-tab:not(.active):hover {
+            color: var(--primary);
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+        
+        .platform-icon-container {
+            width: 48px; /* Larger icons */
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 12px;
+            background: rgba(99, 102, 241, 0.1); /* Indigo tint */
+            flex-shrink: 0; /* Prevent shrinking */
+        }
+        
+        .stat-card {
+            background: rgba(30, 41, 59, 0.6); /* Slightly darker card for stats */
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.15);
+        }
+        
+        .tooltip {
+            position: relative;
+            display: inline-block; /* Essential for tooltip to work on non-block elements */
+            cursor: help;
+        }
+        
+        .tooltip .tooltip-text {
+            visibility: hidden;
+            width: 140px; /* Wider tooltip */
+            background-color: var(--darker);
+            color: #fff;
+            text-align: center;
+            border-radius: 8px;
+            padding: 8px 10px;
+            position: absolute;
+            z-index: 10; /* Bring to front */
+            bottom: 125%; /* Position above element */
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 0;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+            font-size: 11px; /* Smaller font for tooltip */
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        }
+        
+        .tooltip:hover .tooltip-text {
+            visibility: visible;
+            opacity: 1;
+        }
+        
+        .glow {
+            animation: glow 2s infinite alternate ease-in-out;
+        }
+        
+        @keyframes glow {
+            from { box-shadow: 0 0 8px rgba(99, 102, 241, 0.6), 0 0 15px rgba(99, 102, 241, 0.3); }
+            to { box-shadow: 0 0 15px rgba(99, 102, 241, 0.8), 0 0 30px rgba(99, 102, 241, 0.5); }
+        }
+
+        /* Animate.css overrides for subtle entry */
+        .animate__fadeIn { animation-duration: 0.6s; }
+        .animate__fadeInUp { animation-duration: 0.7s; }
+
+        /* Specific text styles for better hierarchy */
+        .stat-label { font-weight: 500; color: rgba(255, 255, 255, 0.7); }
+        .stat-value { font-weight: 700; color: var(--light); }
+
+        /* Icon colors */
+        .text-leetcode { color: #f7931a; } /* LeetCode orange */
+        .text-codechef { color: #5b341f; } /* CodeChef brown/red-ish */
+        .text-emerald-stat { color: #34d399; } /* Tailwind emerald-400 */
+        .text-amber-stat { color: #fbbf24; } /* Tailwind amber-400 */
+        .text-rose-stat { color: #f43f5e; } /* Tailwind rose-400 */
+        .text-indigo-stat { color: #818cf8; } /* Tailwind indigo-400 */
+        .text-violet-stat { color: #a78bfa; } /* Tailwind violet-400 */
+        .text-yellow-stat { color: #facc15; } /* Tailwind yellow-400 */
+    </style>
+</head>
+<body class="flex flex-col items-center justify-center">
+    <div class="card p-8 rounded-2xl w-full max-w-2xl mx-auto md:max-w-3xl lg:max-w-4xl relative overflow-hidden">
+        <div class="relative z-10">
+            <div class="flex flex-col items-center mb-8">
+                <div class="w-20 h-20 bg-indigo-900 rounded-full flex items-center justify-center mb-4 glow">
+                    <i class="fas fa-chart-network text-3xl text-indigo-400"></i>
+                </div>
+                <h1 class="text-4xl lg:text-5xl font-extrabold text-center bg-gradient-to-r from-indigo-400 to-emerald-400 bg-clip-text text-transparent leading-tight">
+                    CodeSync Pro Analytics
+                </h1>
+                <p class="text-slate-400 mt-3 text-center text-lg max-w-lg">
+                    Unlock detailed performance insights from your favorite coding platforms.
+                </p>
+            </div>
+
+            <div class="flex border-b border-slate-700 mb-6 font-semibold text-lg justify-center">
+                <button id="inputTab" class="platform-tab active px-6 py-3 rounded-t-lg">
+                    <i class="fas fa-pencil-alt mr-2"></i>Input
+                </button>
+                <button id="resultTab" class="platform-tab px-6 py-3 rounded-t-lg" disabled>
+                    <i class="fas fa-chart-pie mr-2"></i>Results
+                </button>
+                <button id="compareTab" class="platform-tab px-6 py-3 rounded-t-lg" disabled>
+                    <i class="fas fa-users-line mr-2"></i>Compare
+                </button>
+            </div>
+
+            <div id="inputSection" class="animate__animated animate__fadeIn">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                    <div>
+                        <label for="leetcode" class="block text-slate-300 text-base font-semibold mb-3 flex items-center">
+                            <div class="platform-icon-container mr-3">
+                                <i class="fab fa-leetcode text-leetcode text-2xl"></i>
+                            </div>
+                            <span>LeetCode Username</span>
+                        </label>
+                        <div class="relative tooltip">
+                            <input id="leetcode" type="text" class="input-field px-5 py-3 rounded-xl border border-slate-700 focus:outline-none text-white placeholder-slate-500" 
+                                   placeholder="e.g., G_saidatta" autocomplete="off">
+                            <span class="tooltip-text">Enter your LeetCode username.</span>
+                            <div class="absolute right-4 top-1/2 -translate-y-1/2 text-slate-500 hidden" id="leetcodeValid">
+                                <i class="fas fa-check-circle text-emerald-500 text-xl"></i>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <label for="codechef" class="block text-slate-300 text-base font-semibold mb-3 flex items-center">
+                            <div class="platform-icon-container mr-3">
+                                <i class="fas fa-hat-chef text-codechef text-2xl"></i>
+                            </div>
+                            <span>CodeChef Username</span>
+                        </label>
+                        <div class="relative tooltip">
+                            <input id="codechef" type="text" class="input-field px-5 py-3 rounded-xl border border-slate-700 focus:outline-none text-white placeholder-slate-500" 
+                                   placeholder="e.g., saidattagowthu" autocomplete="off">
+                            <span class="tooltip-text">Enter your CodeChef username.</span>
+                            <div class="absolute right-4 top-1/2 -translate-y-1/2 text-slate-500 hidden" id="codechefValid">
+                                <i class="fas fa-check-circle text-emerald-500 text-xl"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex flex-col sm:flex-row gap-4 mb-8">
+                    <button id="getScoresBtn" onclick="getScores()" class="btn-primary flex-1 px-6 py-3.5 rounded-xl font-bold text-lg flex items-center justify-center gap-3">
+                        <span id="buttonText"><i class="fas fa-chart-line mr-2"></i> Analyze Profiles</span>
+                        <div id="spinner" class="spinner hidden"></div>
+                    </button>
+                    
+                    <button onclick="resetForm()" class="btn-secondary px-6 py-3.5 rounded-xl font-bold text-lg flex items-center justify-center gap-3">
+                        <i class="fas fa-eraser mr-2"></i> Clear Inputs
+                    </button>
+                </div>
+
+                <div class="mt-6">
+                    <div class="progress-bar">
+                        <div id="progressFill" class="progress-fill" style="width: 0%"></div>
+                    </div>
+                    <div id="progressText" class="text-sm text-slate-400 mt-2 text-right font-medium">Ready</div>
+                </div>
+            </div>
+
+            <div id="resultSection" class="hidden animate__animated animate__fadeIn">
+                <div id="messageBox" class="mb-6 p-4 rounded-lg text-base hidden flex items-start message-box" role="alert">
+                    <i class="fas fa-info-circle mr-3 mt-0.5 text-xl"></i>
+                    <span id="messageText" class="flex-1"></span>
+                </div>
+
+                <div id="resultCardsContainer" class="space-y-6">
+                    </div>
+
+                <div class="mt-8 flex flex-col sm:flex-row gap-4">
+                    <button onclick="copyToClipboard()" class="btn-secondary px-6 py-3 rounded-xl font-bold flex items-center justify-center gap-2 flex-1">
+                        <i class="far fa-copy mr-1"></i> Copy All Results
+                    </button>
+                    <button onclick="downloadResults()" class="btn-secondary px-6 py-3 rounded-xl font-bold flex items-center justify-center gap-2 flex-1">
+                        <i class="fas fa-file-export mr-1"></i> Export Data
+                    </button>
+                    <button onclick="showInputSection()" class="btn-primary px-6 py-3 rounded-xl font-bold flex items-center justify-center gap-2 flex-1">
+                        <i class="fas fa-search-plus mr-1"></i> New Analysis
+                    </button>
+                </div>
+            </div>
+
+            <div id="compareSection" class="hidden animate__animated animate__fadeIn">
+                <div class="text-center py-10 px-4 text-slate-400">
+                    <i class="fas fa-users-line text-5xl mb-6 text-indigo-500"></i>
+                    <h3 class="text-2xl font-bold mb-3 bg-gradient-to-r from-indigo-400 to-purple-400 bg-clip-text text-transparent">User Comparison Coming Soon!</h3>
+                    <p class="max-w-lg mx-auto text-lg leading-relaxed">
+                        We're actively working on a feature that will enable you to compare performance metrics and insights between multiple coding profiles. Stay tuned for updates!
+                    </p>
+                    <button onclick="showInputSection()" class="mt-6 btn-primary px-6 py-3 rounded-xl font-bold text-lg flex items-center justify-center gap-2 mx-auto">
+                        <i class="fas fa-arrow-left mr-2"></i> Back to Input
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="mt-12 text-slate-500 text-sm text-center w-full max-w-2xl px-4">
+        <div class="flex justify-center space-x-6 mb-3 text-base">
+            <a href="#" class="hover:text-indigo-400 transition transform hover:scale-105" target="_blank" rel="noopener noreferrer"><i class="fab fa-github mr-1"></i> GitHub</a>
+            <a href="#" class="hover:text-indigo-400 transition transform hover:scale-105"><i class="fas fa-question-circle mr-1"></i> Help</a>
+            <a href="#" class="hover:text-indigo-400 transition transform hover:scale-105"><i class="fas fa-bug mr-1"></i> Report Issue</a>
+        </div>
+        <p class="text-slate-600 font-medium">&copy; 2025 CodeSync Analytics. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // DOM Elements
+        const leetcodeInput = document.getElementById("leetcode");
+        const codechefInput = document.getElementById("codechef");
+        const getScoresBtn = document.getElementById("getScoresBtn");
+        const buttonText = document.getElementById("buttonText");
+        const spinner = document.getElementById("spinner");
+        const messageBox = document.getElementById("messageBox");
+        const messageText = document.getElementById("messageText");
+        const resultCardsContainer = document.getElementById("resultCardsContainer"); // Renamed from resultContainer
+        const progressFill = document.getElementById("progressFill");
+        const progressText = document.getElementById("progressText");
+        const inputSection = document.getElementById("inputSection");
+        const resultSection = document.getElementById("resultSection");
+        const compareSection = document.getElementById("compareSection");
+        const inputTab = document.getElementById("inputTab");
+        const resultTab = document.getElementById("resultTab");
+        const compareTab = document.getElementById("compareTab");
+        const leetcodeValid = document.getElementById("leetcodeValid");
+        const codechefValid = document.getElementById("codechefValid");
+
+        // --- Tab Switching Logic ---
+        inputTab.addEventListener("click", showInputSection);
+        resultTab.addEventListener("click", showResultSection);
+        compareTab.addEventListener("click", showCompareSection);
+
+        function setActiveTab(tabId) {
+            document.querySelectorAll('.platform-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            document.getElementById(tabId).classList.add('active');
+        }
+
+        function showSection(sectionId) {
+            document.querySelectorAll('#inputSection, #resultSection, #compareSection').forEach(section => {
+                section.classList.add('hidden');
+            });
+            document.getElementById(sectionId).classList.remove('hidden');
+        }
+
+        function showInputSection() {
+            showSection("inputSection");
+            setActiveTab("inputTab");
+        }
+
+        function showResultSection() {
+            // Only allow switching to result tab if results are displayed
+            if (resultCardsContainer.innerHTML.trim() === "") {
+                showMessage("Please analyze profiles first.", "info");
+                return;
+            }
+            showSection("resultSection");
+            setActiveTab("resultTab");
+        }
+
+        function showCompareSection() {
+            showSection("compareSection");
+            setActiveTab("compareTab");
+        }
+
+        // --- Input Validation Indicators ---
+        function updateInputValidation(inputElement, validationIconElement) {
+            if (inputElement.value.trim().length > 0) {
+                validationIconElement.classList.remove("hidden");
+            } else {
+                validationIconElement.classList.add("hidden");
+            }
+        }
+
+        leetcodeInput.addEventListener("input", () => updateInputValidation(leetcodeInput, leetcodeValid));
+        codechefInput.addEventListener("input", () => updateInputValidation(codechefInput, codechefValid));
+
+        // --- Message Box Handling ---
+        /**
+         * Displays a message in the message box.
+         * @param {string} message - The message to display.
+         * @param {string} type - The type of message ('success', 'error', 'info').
+         */
+        function showMessage(message, type) {
+            const iconElement = messageBox.querySelector("i");
+            let iconClass = "";
+            let bgColorClass = "";
+
+            if (type === "success") {
+                iconClass = "fas fa-check-circle";
+                bgColorClass = "message-box-success";
+            } else if (type === "error") {
+                iconClass = "fas fa-exclamation-circle";
+                bgColorClass = "message-box-error";
+            } else { // info
+                iconClass = "fas fa-info-circle";
+                bgColorClass = "message-box-info";
+            }
+
+            iconElement.className = `${iconClass} mr-3 mt-0.5 text-xl`; // Update icon
+            messageText.textContent = message;
+            messageBox.className = `mb-6 p-4 rounded-lg text-base flex items-start message-box ${bgColorClass}`;
+            messageBox.classList.remove("hidden");
+
+            // Auto-hide success/info messages after 5 seconds
+            if (type !== "error") {
+                setTimeout(() => {
+                    messageBox.classList.add("hidden");
+                }, 5000);
+            }
+        }
+
+        // --- Progress Bar ---
+        /**
+         * Updates the progress bar and text.
+         * @param {number} percentage - The completion percentage (0-100).
+         * @param {string} text - The status text to display.
+         */
+        function updateProgress(percentage, text) {
+            progressFill.style.width = `${percentage}%`;
+            progressText.textContent = text;
+            
+            // Adjust progress bar color based on percentage
+            if (percentage < 30) {
+                progressFill.style.background = "linear-gradient(90deg, #f43f5e, #f97316)"; /* Red to Orange */
+            } else if (percentage < 70) {
+                progressFill.style.background = "linear-gradient(90deg, #f97316, #eab308)"; /* Orange to Yellow */
+            } else {
+                progressFill.style.background = "linear-gradient(90deg, var(--primary), var(--secondary))"; /* Primary to Secondary */
+            }
+        }
+
+        // --- Form Reset ---
+        function resetForm() {
+            leetcodeInput.value = "";
+            codechefInput.value = "";
+            updateInputValidation(leetcodeInput, leetcodeValid); // Clear validation icons
+            updateInputValidation(codechefInput, codechefValid);
+            resultCardsContainer.innerHTML = ""; // Clear displayed results
+            resultTab.disabled = true; // Disable result tab until new data is fetched
+            compareTab.disabled = true; // Disable compare tab
+            updateProgress(0, "Ready to analyze");
+            showMessage("All inputs and results have been cleared.", "info");
+            showInputSection(); // Go back to input tab
+        }
+
+        // --- Dynamic Stat Card Creation ---
+        /**
+         * Creates a stat card element.
+         * @param {string} title - The title of the stat card.
+         * @param {string} value - The value to display.
+         * @param {string} icon - The icon class (Font Awesome).
+         * @param {string} colorClass - The Tailwind color class for the icon (e.g., 'emerald-stat').
+         * @returns {HTMLElement} The created stat card element.
+         */
+        function createStatCard(title, value, icon, colorClass) {
+            const card = document.createElement("div");
+            card.className = `stat-card p-4 rounded-lg border border-slate-700 animate__animated animate__fadeInUp`;
+            card.innerHTML = `
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="stat-label text-sm">${title}</p>
+                        <p class="stat-value text-xl mt-1">${value}</p>
+                    </div>
+                    <div class="w-12 h-12 rounded-full bg-slate-700 bg-opacity-30 flex items-center justify-center">
+                        <i class="${icon} text-2xl ${colorClass}"></i>
+                    </div>
+                </div>
+            `;
+            return card;
+        }
+
+        /**
+         * Populates and displays platform-specific statistics.
+         * @param {object} data - The platform data.
+         * @param {string} username - The username used for the query.
+         * @param {string} platformName - 'LeetCode' or 'CodeChef'.
+         * @param {string} iconClass - Base Font Awesome icon class for the platform.
+         * @param {string} iconColorClass - Tailwind color class for the platform icon.
+         */
+        function displayPlatformStats(data, username, platformName, iconClass, iconColorClass) {
+            const platformUser = data.username || username;
+            const platformSection = document.createElement("div");
+            platformSection.className = "platform-section fade-in";
+            platformSection.innerHTML = `
+                <div class="flex items-center mb-4">
+                    <div class="platform-icon-container mr-3">
+                        <i class="${iconClass} text-2xl ${iconColorClass}"></i>
+                    </div>
+                    <h2 class="text-2xl font-bold text-slate-200">${platformName}: ${platformUser}</h2>
+                </div>
+                <div class="grid grid-cols-2 lg:grid-cols-3 gap-4 mb-6" id="${platformName.toLowerCase()}StatsGrid">
+                    </div>
+                ${Object.keys(data).length === 1 && data.username === platformUser ? 
+                    `<div class="p-4 bg-slate-800 rounded-lg text-center text-slate-400">
+                        <i class="fas fa-user-slash text-2xl mb-2"></i>
+                        <p>No detailed data found for this user.</p>
+                    </div>` : ''
+                }
+            `;
+            
+            resultCardsContainer.appendChild(platformSection);
+            const statsGrid = platformSection.querySelector(`#${platformName.toLowerCase()}StatsGrid`);
+
+            // LeetCode specific stats
+            if (platformName === "LeetCode") {
+                if (data.totalSolved !== undefined) statsGrid.appendChild(createStatCard("Total Solved", data.totalSolved, "fas fa-check-circle", "emerald-stat"));
+                if (data.easySolved !== undefined) statsGrid.appendChild(createStatCard("Easy", data.easySolved, "fas fa-leaf", "emerald-stat"));
+                if (data.mediumSolved !== undefined) statsGrid.appendChild(createStatCard("Medium", data.mediumSolved, "fas fa-flask", "amber-stat"));
+                if (data.hardSolved !== undefined) statsGrid.appendChild(createStatCard("Hard", data.hardSolved, "fas fa-fire", "rose-stat"));
+                if (data.ranking !== undefined) statsGrid.appendChild(createStatCard("Global Rank", `#${data.ranking.toLocaleString()}`, "fas fa-globe", "indigo-stat"));
+                if (data.contributionPoints !== undefined) statsGrid.appendChild(createStatCard("Contribution", data.contributionPoints, "fas fa-hands-helping", "violet-stat"));
+            } 
+            // CodeChef specific stats
+            else if (platformName === "CodeChef") {
+                if (data.contest_rating !== undefined) statsGrid.appendChild(createStatCard("Rating", data.contest_rating, "fas fa-star-half-alt", "red-stat"));
+                if (data.contests_participated !== undefined) statsGrid.appendChild(createStatCard("Contests", data.contests_participated, "fas fa-trophy", "amber-stat"));
+                if (data.total_problems_solved !== undefined) statsGrid.appendChild(createStatCard("Problems Solved", data.total_problems_solved, "fas fa-puzzle-piece", "emerald-stat"));
+                if (data.stars !== undefined) statsGrid.appendChild(createStatCard("Stars", data.stars, "fas fa-star", "yellow-stat"));
+                // Global Rank and Country Rank are not in the API response, so they will not be displayed.
+            }
+        }
+
+        // --- Copy/Download Functionality ---
+        function collectResultsText() {
+            let text = "";
+            document.querySelectorAll(".platform-section").forEach(section => {
+                const title = section.querySelector("h2").textContent;
+                text += `${title}\n${"=".repeat(title.length)}\n`;
+                section.querySelectorAll(".stat-card").forEach(statCard => {
+                    const label = statCard.querySelector(".stat-label").textContent;
+                    const value = statCard.querySelector(".stat-value").textContent;
+                    text += `${label}: ${value}\n`;
+                });
+                text += "\n";
+            });
+            return text.trim();
+        }
+
+        function copyToClipboard() {
+            const textToCopy = collectResultsText();
+            if (!textToCopy) {
+                showMessage("No results to copy!", "error");
+                return;
+            }
+            navigator.clipboard.writeText(textToCopy)
+                .then(() => showMessage("Results copied to clipboard!", "success"))
+                .catch(err => {
+                    console.error("Failed to copy text: ", err);
+                    showMessage("Failed to copy. Please try manually.", "error");
+                });
+        }
+
+        function downloadResults() {
+            const textToDownload = collectResultsText();
+            if (!textToDownload) {
+                showMessage("No results to export!", "error");
+                return;
+            }
+
+            const blob = new Blob([textToDownload], { type: "text/plain;charset=utf-8" });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement("a");
+            a.href = url;
+            a.download = `codesync_analysis_${new Date().toISOString().slice(0, 10)}.txt`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+            showMessage("Results downloaded successfully!", "success");
+        }
+
+        // --- Main Data Fetching Logic ---
+        async function getScores() {
+            resultCardsContainer.innerHTML = ""; // Clear previous results
+            showMessage("", "info"); // Clear previous messages
+            updateProgress(0, "Starting analysis...");
+            getScoresBtn.disabled = true;
+            buttonText.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> Analyzing...';
+            spinner.classList.remove("hidden");
+            resultTab.disabled = true; // Disable result tab during new fetch
+            compareTab.disabled = true; // Disable compare tab during new fetch
+
+            const leet = leetcodeInput.value.trim();
+            const chef = codechefInput.value.trim();
+
+            if (!leet && !chef) {
+                showMessage("Please enter at least one username (LeetCode or CodeChef).", "error");
+                updateProgress(0, "Error: Missing input");
+                getScoresBtn.disabled = false;
+                buttonText.innerHTML = '<i class="fas fa-chart-line mr-2"></i> Analyze Profiles';
+                spinner.classList.add("hidden");
+                return;
+            }
+
+            const url = `https://8teu07es5h.execute-api.us-east-1.amazonaws.com/prob/get-score?leetcode=${leet}&codechef=${chef}`;
+
+            try {
+                updateProgress(20, "Fetching data from APIs...");
+                const response = await fetch(url);
+
+                if (!response.ok) {
+                    const errorData = await response.json().catch(() => ({}));
+                    const errorMessage = errorData.message || `API error: ${response.status} ${response.statusText}`;
+                    throw new Error(errorMessage);
+                }
+
+                updateProgress(60, "Processing received data...");
+                const data = await response.json();
+                console.log("Raw API Response:", data);
+
+                let dataFetchedForAnyPlatform = false;
+
+                if (data.leetcode && Object.keys(data.leetcode).length > 0 && leet) {
+                    displayPlatformStats(data.leetcode, leet, "LeetCode", "fab fa-leetcode", "text-leetcode");
+                    dataFetchedForAnyPlatform = true;
+                } else if (leet) {
+                    const noLeetData = document.createElement("div");
+                    noLeetData.className = "platform-section fade-in";
+                    noLeetData.innerHTML = `
+                        <div class="flex items-center mb-4">
+                            <div class="platform-icon-container mr-3">
+                                <i class="fab fa-leetcode text-2xl text-leetcode"></i>
+                            </div>
+                            <h2 class="text-2xl font-bold text-slate-200">LeetCode: ${leet}</h2>
+                        </div>
+                        <div class="p-4 bg-slate-800 rounded-lg text-center text-slate-400">
+                            <i class="fas fa-user-slash text-3xl mb-3"></i>
+                            <p>No data found for this LeetCode username. It might not exist or data is unavailable.</p>
+                        </div>
+                    `;
+                    resultCardsContainer.appendChild(noLeetData);
+                }
+
+                if (data.codechef && Object.keys(data.codechef).length > 0 && chef) {
+                    displayPlatformStats(data.codechef, chef, "CodeChef", "fas fa-hat-chef", "text-codechef");
+                    dataFetchedForAnyPlatform = true;
+                } else if (chef) {
+                     const noChefData = document.createElement("div");
+                    noChefData.className = "platform-section fade-in";
+                    noChefData.innerHTML = `
+                        <div class="flex items-center mb-4">
+                            <div class="platform-icon-container mr-3">
+                                <i class="fas fa-hat-chef text-2xl text-codechef"></i>
+                            </div>
+                            <h2 class="text-2xl font-bold text-slate-200">CodeChef: ${chef}</h2>
+                        </div>
+                        <div class="p-4 bg-slate-800 rounded-lg text-center text-slate-400">
+                            <i class="fas fa-user-slash text-3xl mb-3"></i>
+                            <p>No data found for this CodeChef username. It might not exist or data is unavailable.</p>
+                        </div>
+                    `;
+                    resultCardsContainer.appendChild(noChefData);
+                }
+
+                updateProgress(100, "Analysis complete!");
+                showMessage("Profile analysis completed successfully! 🎉", "success");
+                resultTab.disabled = false; // Enable result tab
+                // Only enable compare tab if both platforms might have data
+                if (leet && chef) {
+                   compareTab.disabled = false;
+                }
+                showResultSection(); // Automatically switch to results view
+
+            } catch (error) {
+                console.error("Fetch Error:", error);
+                updateProgress(0, "Analysis failed");
+                showMessage(`Error during analysis: ${error.message}`, "error");
+                
+                // Display generic error message in results section
+                resultCardsContainer.innerHTML = `
+                    <div class="p-6 bg-slate-900 rounded-lg text-center border border-rose-700 animate__animated animate__shakeX">
+                        <i class="fas fa-exclamation-triangle text-4xl text-rose-500 mb-4"></i>
+                        <h3 class="text-xl font-bold text-rose-300 mb-2">Analysis Failed</h3>
+                        <p class="text-slate-400">Something went wrong while fetching data. Please check your network connection and usernames, then try again.</p>
+                        <p class="text-sm text-slate-500 mt-3">Detail: ${error.message}</p>
+                    </div>
+                `;
+                resultTab.disabled = false; // Still enable result tab to show the error
+                showResultSection();
+            } finally {
+                getScoresBtn.disabled = false;
+                buttonText.innerHTML = '<i class="fas fa-chart-line mr-2"></i> Analyze Profiles';
+                spinner.classList.add("hidden");
+            }
+        }
+
+        // --- Initialization on Load ---
+        document.addEventListener("DOMContentLoaded", () => {
+            const mainCard = document.querySelector(".card");
+            mainCard.classList.add("animate__animated", "animate__fadeInUp");
+            if (leetcodeInput.value === "") {
+                leetcodeInput.focus();
+            }
+            updateProgress(0, "Ready to analyze");
+        });
+    </script>
+</body>
+</html>
