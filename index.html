@@ -3,119 +3,199 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Protfolio</title>
+  <title>Portfolio | Sai Datta Manikanta Gowthu</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <nav class="navbar">
-    <a href="#home" class="logo"><img href="#home" src="https://raw.githubusercontent.com/gowthusaidatta/codesoft/main/loogo.png" alt="SD"></a>
+    <a href="#home" class="logo"><img src="https://lh3.google.com/d/1SRvP91erwWsM4ykrWHvK8YNPrTgv8_Cb" alt="SD"></a>
     <ul class="nav-links">
       <li><a href="#home">Home</a></li>
       <li><a href="about2.html">About</a></li>
-      <li><a href="#skills">Skills</a></li>
-      <li><a href="#education">Education</a></li>
-      <li><a href="#Certify">Certifications</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#certifications">Certifications</a></li>
+      <li><a href="#coding-profiles">Coding Profiles</a></li>
       <li><a href="contact.html">Contact Us</a></li>
     </ul>
   </nav>
+
   <section id="home" class="hero">
     <div class="hero-content">
-      <h1>Web Developer</h1>
-      <p>Building digital experiences that merge creativity with technology</p>
-      <p>Specializing in modern web development and Protfolio</p>
-      <a href="https://www.linkedin.com/in/v-v-satya-sai-datta-manikanta-gowthu-41709b291/" class="cta-button">Let's Connect</a>
+      <!-- <p class="eyebrow">Problem Solving — IoT Student — Web Development</p> -->
+      <h1>SAI DATTA MANIKANTA GOWTHU</h1>
+      <p class="lead">Results-driven Computer Science (IoT) student focused on backend engineering, scalable cloud-native systems, and production-ready web apps.</p>
+      <div class="badge-row">
+        <span class="pill">Java</span>
+        <span class="pill">Python</span>
+        <span class="pill">React.js</span>
+        <span class="pill">AWS &amp; Firebase</span>
+      </div>
+      <div class="hero-actions">
+        <a class="cta-button" href="mailto:saidattagowthu@gmail.com">Email Me</a>
+        <a class="ghost-button" href="https://www.linkedin.com/in/v-v-satya-sai-datta-manikanta-gowthu-41709b291/" target="_blank" rel="noopener">LinkedIn</a>
+        <a class="ghost-button" href="contact.html">Contact Form</a>
+      </div>
     </div>
     <div class="hero-image">
-        <img src="https://raw.githubusercontent.com/gowthusaidatta/codesoft/main/23MH1A4918.png" alt="Profile" class="profile-img">
-
+      <img src="https://lh3.google.com/d/1j3Y7xrwW_ABgKK6k2IPLnV82wxCVFX9V" alt="Profile" class="profile-img">
     </div>
   </section>
 
-  <!-- Skills Section -->
-  <section id="skills" class="skills">
-    <h2>Technical Expertise</h2>
-    <div class="skilles-grid">
-      <div class="skill-card">
-        <i class="fa-solid fa-code"></i>
-        <h3>Frontend development</h3>
-        <p>HTML, CSS, JavaScript</p>
-      </div>
-      <div class="skill-card">
-        <i class="fa-solid fa-computer"></i>
-        <h3>Operating System</h3>
-        <p>Windows, Linux(Redhat)</p>
-      </div>
-      <div class="skill-card">
-        <i class="fa-solid fa-network-wired"></i>
-        <h3>Computer Networks</h3>
-        <p>Networking</p>
-      </div>
+  <section id="projects" class="section projects">
+    <div class="section-header">
+      <p class="eyebrow">Recent Work</p>
+      <h2>Projects</h2>
+    </div>
+    <div class="card-grid">
+      <article class="project-card">
+        <div class="card-top">
+          <h3>CodeSync – Coding Analytics Platform</h3>
+          <p class="meta">AWS · Tailwind · Cognito · QuickSight</p>
+        </div>
+        <p>Full-stack platform tracking competitive programming performance across CodeChef, LeetCode, HackerRank, and GFG with coding score tracker, smart reminders (AWS SNS/SES), analytics dashboards, and mobile app support. Deployed on AWS Lambda, API Gateway, Cognito, and S3 with CI/CD via GitHub Actions and CodePipeline.</p>
+        <div class="tags"><span class="pill">AWS</span><span class="pill">CI/CD</span><span class="pill">Serverless</span></div>
+        <div class="card-links">
+          <a href="https://codesync-praveen.vercel.app/" target="_blank" rel="noopener">Preview</a>
+          <a href="https://github.com/gowthusaidatta/CodeSync" target="_blank" rel="noopener">GitHub</a>
+        </div>
+      </article>
+
+      <article class="project-card">
+        <div class="card-top">
+          <h3>Student Photo Downloader</h3>
+          <p class="meta">HTML · CSS · JavaScript</p>
+        </div>
+        <p>Web application to download student photos by roll number with form validation, responsive design, and user-friendly error handling for invalid inputs.</p>
+        <div class="tags"><span class="pill">Frontend</span><span class="pill">UX</span></div>
+        <div class="card-links">
+          <a href="https://gowthusaidatta.github.io/student_phots_by_rollnumber/" target="_blank" rel="noopener">Preview</a>
+          <a href="https://github.com/gowthusaidatta/student_phots_by_rollnumber/" target="_blank" rel="noopener">GitHub</a>
+        </div>
+      </article>
+
+      <article class="project-card">
+        <div class="card-top">
+          <h3>StayHub – Property &amp; Rental Finder</h3>
+          <p class="meta">React.js · Google Cloud · Firebase</p>
+        </div>
+        <p>Dynamic web platform for rental houses, function halls, and plots with Firebase Authentication and Firestore for secure real-time listings. Responsive UI with intelligent search and filters for location, budget, and property type.</p>
+        <div class="tags"><span class="pill">React</span><span class="pill">Firestore</span><span class="pill">GCP</span></div>
+        <div class="card-links">
+          <a href="https://github.com/gowthusaidatta/StayHub" target="_blank" rel="noopener">GitHub</a>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section id="experience" class="section experience">
+    <div class="section-header">
+      <p class="eyebrow">Industry</p>
+      <h2>Experience</h2>
+    </div>
+    <div class="card-grid">
+      <article class="experience-card">
+        <div class="card-top">
+          <h3>AWS Intern — Technical Hub Pvt. Ltd.</h3>
+          <p class="meta">May 2025 – Jun 2025</p>
+        </div>
+        <ul>
+          <li>Developed and deployed cloud components using AWS EC2, S3, Lambda, and IAM.</li>
+          <li>Built secure serverless modules aligned with cloud and DevOps best practices.</li>
+          <li>Gained hands-on experience deploying scalable applications and managing cloud infrastructure.</li>
+        </ul>
+      </article>
     </div>
   </section>
 
   
 
-  <!-- Education-->
-  <section id="education" class="education">
-    <h2>Education</h2>
-    <div class="education-grid">
-      <div class="education-card">
-        <i class="fa-solid fa-user-graduate"></i>
-        <h3>Aditya college of enginerring and technology | 2023-present</h3>
-        <p>Bachelor Of Internet of Things(IoT)</p>
-        <p>Surampalam, Andhra Pradesh</p>
-        <p>CGPA : 8.22</p>
-      </div>
-      <div class="education-card">
-        <i class="fa-solid fa-user-graduate"></i>
-        <h3>sri chaitanya junior college | 2021</h3>
-        <p>Higher Secondary Education</p>
-        <p>kakinada, Andhra Pradesh</p>
-        <p>Percetage : 82%</p>
-      </div>
-      <div class="education-card">
-        <i class="fa-solid fa-user-graduate"></i>
-        <h3>Sri Adrsha high school| 2020</h3>
-        <p>Secondary Education</p>
-        <p>pithapuram, Andhra Pradesh</p>
-        <p>Percetage : 88%</p>
-      </div>
+  <section id="certifications" class="section certifications">
+    <div class="section-header">
+      <p class="eyebrow">Credentials</p>
+      <h2>Certifications &amp; Achievements</h2>
     </div>
-  </section>
-
-
-   <!-- Certify Section -->
-   <section id="Certify" class="Certify">
-    <h2>Certifications</h2>
     <div class="Certify-grid">
       <div class="Certify-card">
-        <i class="fa-solid fa-certificate"></i>
-        <h3>Cisco Networking Academy</h3>
-        <p>C and Python Programming</p>
+        <div class="cert-header"><img class="cert-logo" src="data:image/png;base64,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" alt="Red Hat logo"><h3><a href="https://www.credly.com/badges/7431679b-2ca0-454c-b513-88940f347ddb/public_url" target="_blank" rel="noopener">Red Hat Certified System Administrator (RHCSA)</a></h3></div>
       </div>
       <div class="Certify-card">
-        <i class="fa-solid fa-certificate"></i>
-        <h3>IT Specialist</h3>
-        <p>HTML and CSS</p>
+        <div class="cert-header"><img class="cert-logo" src="https://upload.wikimedia.org/wikipedia/commons/3/38/HTML5_Badge.svg" alt="HTML5 badge"><h3><a href="https://www.credly.com/badges/1435e110-1078-459f-9b8e-cc1bb25ee516/public_url" target="_blank" rel="noopener">IT Specialist - HTML and CSS</a></h3></div>
       </div>
       <div class="Certify-card">
-        <i class="fa-solid fa-certificate"></i>
-        <h3>Projects</h3>
-        <p>  <b>Arduino car:</b> working by using voice commands of the user</p>
+        <div class="cert-header"><img class="cert-logo" src="https://upload.wikimedia.org/wikipedia/en/3/30/Java_programming_language_logo.svg" alt="Java logo"><h3><a href="https://catalog-education.oracle.com/ords/certview/sharebadge?id=AF902EF27FD95B68EF2210B21F1BE6B71AE8AC207D3158F1DECCEC5930CB1E6D" target="_blank" rel="noopener">Java Certified Foundations Associate (Oracle)</a></h3></div>
       </div>
-      <br>
       <div class="Certify-card">
-        <i class="fa-solid fa-certificate"></i>
-        <h3>Oracle Academy</h3>
-        <p>Completed <b>object oriented programming</b> in Oracle Academy</p>
+        <div class="cert-header"><img class="cert-logo" src="data:image/jpeg;base64,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" alt="Oracle Cloud logo"><h3><a href="https://catalog-education.oracle.com/ords/certview/sharebadge?id=5F9C45EACD9B2493895D2E8437631CBA15B5F238B603C1987B0E631CC8D808BB" target="_blank" rel="noopener">Oracle Cloud Infrastructure 2025 Certified Generative AI Professional</a></h3></div>
+      </div>
+      <div class="Certify-card">
+        <div class="cert-header"><img class="cert-logo" src="https://upload.wikimedia.org/wikipedia/commons/6/64/Cisco_logo.svg" alt="Cisco logo"><h3><a href="https://www.credly.com/badges/8d75986a-cf1e-455a-9562-1307fb86e385" target="_blank" rel="noopener">Python Essentials 1 (Cisco)</a></h3></div>
+      </div>
+      <div class="Certify-card">
+        <div class="cert-header"><img class="cert-logo" src="data:image/png;base64,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" alt="Red Hat logo"><h3><a href="https://www.credly.com/badges/abf7ee27-303b-4c79-b429-d33310d2ceb2" target="_blank" rel="noopener">Red Hat System Administration II (RH134 - RHA) Ver. 9.3</a></h3></div>
+      </div>
+      <div class="Certify-card">
+        <div class="cert-header"><img class="cert-logo" src="https://upload.wikimedia.org/wikipedia/commons/5/51/Google_Cloud_logo.svg" alt="Google Cloud logo"><h3><a href="https://www.credly.com/users/v-v-satya-sai-datta-manikanta-gowthu.1eda4b6f/badges#credly" target="_blank" rel="noopener">50+ Google Cloud Skill Badges</a></h3></div>
       </div>
     </div>
   </section>
 
-  <!--Footer Section-->
+  <section id="coding-profiles" class="section coding-profiles">
+    <div class="section-header">
+      <p class="eyebrow">Competitive Programming</p>
+      <h2>Coding Profiles</h2>
+    </div>
+    <div class="profiles-grid">
+      <a href="https://leetcode.com/u/G_Saidatta/" target="_blank" rel="noopener" class="profile-card">
+        <div class="profile-icon leetcode-icon">
+          <img class="profile-logo" alt="LeetCode logo" src="data:image/png;base64,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"/>
+        </div>
+        <h3>LeetCode</h3>
+      </a>
+      <a href="https://www.codechef.com/users/saidattagowthu" target="_blank" rel="noopener" class="profile-card">
+        <div class="profile-icon codechef-icon">
+          <img class="profile-logo" alt="CodeChef logo" src="data:image/jpeg;base64,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"/>
+        </div>
+        <h3>CodeChef</h3>
+      </a>
+      <a href="https://www.hackerrank.com/profile/gowthusaidatta" target="_blank" rel="noopener" class="profile-card">
+        <div class="profile-icon hackerrank-icon">
+          <img class="profile-logo" alt="HackerRank logo" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAAADhCAMAAAAJbSJIAAAAWlBMVEUNFB4A6mT///8AAAANEh4NABwA62QNABoADBgEDhoNABg0OD8ImkgA72YFv1UnLDIAABC4ubvCw8Xv7/AAAAj29vaPkZOcnaAAABIKdjsHnkmztLW+v8ESGSLs8eGCAAAA/0lEQVR4nO3cOQ7CMBBAUcDsENaEnftfkwYapkEWCsR6r80U/nIVR3GvBwAAAAAAAAAAAAAAAAAAANCeYZ62ljdLm3d1nKrDUJq9no0yTVoKvDeDd4eQmI5haH96BZ6rfo7xpZ3E6SKsfbBNoXAXp9bPTZxcqnGOajXvSuEybw8VKlSoUKFChQoVKlSoUKFChQoVKlSoUOHvC68puJVV2OyD+HGj04WfUahQoUKFChUqVKhQoUKFCrteWP47fvnnNOWftSlUqFChQoUKFSpUqFChQoUKFSpUqFChwqzCP/8fv/w7Fcq/F+Mb/vxuEwAAAAAAAAAAAAAAAAAAAKDTHoDCYDr8qkOBAAAAAElFTkSuQmCC"/>
+        </div>
+        <h3>HackerRank</h3>
+      </a>
+      <a href="https://www.geeksforgeeks.org/profile/saidattagowthu" target="_blank" rel="noopener" class="profile-card">
+        <div class="profile-icon geeksforgeeks-icon">
+          <img class="profile-logo" alt="GeeksforGeeks logo" src="data:image/png;base64,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"/>
+        </div>
+        <h3>GeeksforGeeks</h3>
+      </a>
+      <a href="https://codeforces.com/profile/saidatta_gowthu" target="_blank" rel="noopener" class="profile-card">
+        <div class="profile-icon codeforces-icon">
+          <img class="profile-logo" alt="Codeforces logo" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAAADhCAMAAAAJbSJIAAAA2FBMVEX///8hlvP/wQf0QzaJwfcVlvX/wgb/8dD82Nf1Oir2RDZFpPX2PS73QTL5op7/1XH/yDX1XlT/xQD/yABMp/QVnP4jl/IjoP8tov3k8f0Al/72+v7q9f4Ll/q73vuXyfiBw/dgsfU0oPWw2PzH5Pz/zD///ff/9+P/9Nr6vLj80s/+8vH8dm794+F6vPecz/j/67T/4JL/2n3/zyL/1mn/8cj/0lb/+Oj/4qH/1Ez/6LX/0Tf5ran4oJr+XlL8UEP5fnb3j4j3aF77xsP9l5D/35X/3XXzMB2biCeCAAAEQ0lEQVR4nO3d7VPaMADH8dISBNo6aSVVa7CAyLBUxwAfJgPEB/7//2gVnbp5lzS589psv+9r6PVzeei7xDAQQgghhBBCCCGEEEIIIYT+i1pRe9fmtduOWnm/pHr7ET1oMkZ4MdY8oNF+3q+qVNjtMEJpSRSlhHW6Yd6vK99hOSBi3kukWT7M+4VlC89YVt4mdqbbKJblgCmxnPcry9VqSgJLpaZWe2poE2khsXWap+dB5k3mNRqc5/3a2Qvb8kOYDmJbn0E87igAS9Q+zvvFM9fdUxLudfN+8cwdZf/Wv48c5f3imSszFSHV6JNYVtlo0jGEsDhBCGHxgxDC4gchhMUPQgiLH4QQFj8IISx+EEJY/CCEsPhBmJPw8tvo+xdu30dXX/UV9h97Y9+rcPP88c1kqqlwVPFTgiko/YnvTU40FPYvfBHuLd8XTtXCCb9eeMLhe0/0RDO1aMLLiRTQNL2dLa2EJyNfDmhW/MmlTsKpeIf5OIpXOgknnjTQ9K65u02xhH1TfgjTz8YPfYQjiQ/Fu0HkrsRiCWU+hW/5N31thDsKy/BpO+UtxGIJFVbhk7DC+yQWS6gETHcnCCGEEEIIIYQQQgghhBBCvYXJ6WC2zW02OI31FSY/h/OF63CrLxrL2atRM+HPed2t1y1R6Y8aAx2FccMR6zZCy3Ld21g7YbKoZfK9VFvGmgmTlSMDTImbUdRHGN+6csB0Nc60Eg4WksB0Lc6rGgmToewQptXuNRLeZdtF/6xuxdoI43upffR364E2wmSlMEkty1nqI1woCd2GNsKqq7IOrfpCH2FNSWhZEEIIIYQQQgghhBBCCCGEEEIIIYQQQgghhBBCCCGEEEIIIYQQQgghhBBCCCGEEEIIIYQQQgghhBBCCCGEEEIIIYQQQgghhBBCCOE/IzT/eaFOY/gp5wgzFSDlCzOeLvRROFY7C9rjnQV9RFRujy+RI84zVc9UmBvXaieWc8/z7u6pCOlelydsqAmXn3Im+7GtMoQl+5jzzHgpeYTSc7VtY0vhaoQ07uUIYVtlmpJ2yHvoQOn0llpinKhMU++Gf4fHeSAvpME595lVlWnqDNN/ThUuR6g88K/TCW357wWxuUNoGNvy07TunqZ/PHmUvaNEdL1FWiuQFgYtwTMVDopy7zcntvWvZe+ZGXNvt9gUyX4SWSR85t1ckugMk+d/TntSRM/7JnwZIzyTI5IzwRx9aiD3TXRWp7//uSWz2/j+D/GdVoZxWA6yr0USlA8zPNO4q0usRWdVffvn5aOZ0eibwjX4UtjtMELFeyqlhHW6GUbwqWS4zjiMzvo2/uOv017FF9+75lfGV1kG8Ln9iB40GSO8GGse0Gg/8zPjQWNdcxyXm1Nbr99m6Gv9h0lvh1vvYiS4yupDrai9a/PabUeiPfTvqtvLVYPb8HaWSD4UIYQQQgghhBBCCCGEEELo8/sF8kP1zJcciM0AAAAASUVORK5CYII="/>
+        </div>
+        <h3>CodeForces</h3>
+      </a>
+    </div>
+  </section>
+
+  <section id="contact" class="section contact">
+    <div class="section-header">
+      <p class="eyebrow">Get In Touch</p>
+      <h2>Contact</h2>
+    </div>
+    <div class="contact-grid">
+      <div class="contact-card"><i class="fa-solid fa-envelope"></i><a href="mailto:saidattagowthu@gmail.com">saidattagowthu@gmail.com</a></div>
+      <div class="contact-card"><i class="fa-solid fa-phone"></i><a href="tel:+919573448222">+91 9573448222</a></div>
+      <div class="contact-card"><i class="fa-brands fa-linkedin"></i><a href="https://www.linkedin.com/in/v-v-satya-sai-datta-manikanta-gowthu-41709b291/" target="_blank" rel="noopener">LinkedIn Profile</a></div>
+      <div class="contact-card"><i class="fa-brands fa-github"></i><a href="https://github.com/gowthusaidatta" target="_blank" rel="noopener">GitHub</a></div>
+    </div>
+    <p class="lead contact-note">Feel free to reach out for collaboration, internships, or backend/cloud projects.</p>
+  </section>
+
   <footer>
-    <p>&copy; 2024 Saidatta. All rights reserved.</p>
+    <p>&copy; 2026 Sai Datta Manikanta Gowthu. All rights reserved.</p>
     <div class="social-links">
       <a href="https://www.linkedin.com/in/v-v-satya-sai-datta-manikanta-gowthu-41709b291/"><i class="fa-brands fa-linkedin"></i></a>
       <a href="https://github.com/gowthusaidatta"><i class="fa-brands fa-github"></i></a>
