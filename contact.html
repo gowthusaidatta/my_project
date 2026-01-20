@@ -3,136 +3,124 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <base href="/my_project/">
-  <title>About Me</title>
+  <title>Contact | Sai Datta Manikanta Gowthu</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <link rel="stylesheet" href="styles.css?v=1.1"> 
+  <link rel="stylesheet" href="styles.css?v=1.1">
 
   <style>
-    /* General Styles */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Poppins', sans-serif;
+    /* Contact Page Specific Styles */
+    .contact-section {
+      min-height: 100vh;
+      padding: 140px 5% 60px 5%;
+      background: radial-gradient(circle at 75% 30%, var(--accent-glow) 0%, transparent 30%);
     }
 
-    body {
-      background: linear-gradient(to right, #121212, #1e1e1e);
-      color: #fff;
-    }
-
-    /* Navbar */
-    .navbar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 15px 50px;
-      background: rgba(0, 0, 0, 0.8);
-      backdrop-filter: blur(10px);
-      position: fixed;
-      width: 100%;
-      top: 0;
-      z-index: 1000;
-    }
-
-    .logo img {
-      width: 50px;
-      height: auto;
-    }
-
-    .nav-links {
-      list-style: none;
-      display: flex;
-    }
-
-    .nav-links li {
-      margin: 0 15px;
-    }
-
-    .nav-links a {
-      text-decoration: none;
-      color: #fff;
-      font-size: 18px;
-      transition: 0.3s;
-    }
-
-    .nav-links a:hover {
-      color: #04AA6D;
-    }
-
-    /* Form Container - Glassmorphism */
-    .container {
-      width: 50%;
-      margin: 120px auto;
+    .contact-container {
+      max-width: 600px;
+      margin: 0 auto;
       padding: 40px;
-      background: rgba(255, 255, 255, 0.1);
-      backdrop-filter: blur(15px);
-      border-radius: 15px;
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+      background: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(10px);
+      border-radius: 12px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .contact-container h2 {
+      margin-bottom: 10px;
+      font-size: 32px;
+      color: var(--text);
       text-align: center;
     }
 
-    .container h2 {
-      margin-bottom: 20px;
-      font-size: 24px;
-      color: #04AA6D;
+    .contact-container .eyebrow {
+      text-align: center;
+      color: var(--accent);
+      font-weight: 600;
+      font-size: 14px;
+      margin-bottom: 30px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
     }
 
-    input, select, textarea {
+    .contact-form input,
+    .contact-form select,
+    .contact-form textarea {
       width: 100%;
-      padding: 12px;
+      padding: 14px;
       margin: 10px 0;
       border-radius: 8px;
-      border: none;
+      border: 2px solid rgba(0, 0, 0, 0.1);
       outline: none;
       font-size: 16px;
+      font-family: 'Segoe UI', sans-serif;
+      background: rgba(255, 255, 255, 0.9);
+      color: var(--text);
+      transition: all 0.3s ease;
     }
 
-    input, select {
-      background: rgba(255, 255, 255, 0.2);
-      color: #fff;
+    .contact-form input:focus,
+    .contact-form select:focus,
+    .contact-form textarea:focus {
+      border-color: var(--accent);
+      background: #fff;
     }
 
-    textarea {
-      height: 120px;
+    .contact-form textarea {
+      height: 140px;
+      resize: vertical;
     }
 
-    input::placeholder, textarea::placeholder {
-      color: #ddd;
+    .contact-form input::placeholder,
+    .contact-form textarea::placeholder {
+      color: #999;
     }
 
-    input[type="submit"] {
-      background: #04AA6D;
-      color: white;
+    .contact-form input[type="submit"] {
+      background: var(--accent);
+      color: var(--text);
       font-size: 18px;
+      font-weight: 600;
       cursor: pointer;
-      transition: 0.3s;
+      border: none;
+      margin-top: 10px;
+      transition: all 0.3s ease;
     }
 
-    input[type="submit"]:hover {
-      background: #45a049;
+    .contact-form input[type="submit"]:hover {
+      background: #6fb028;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(128, 204, 46, 0.3);
     }
 
     /* Footer */
     footer {
       text-align: center;
-      padding: 20px;
-      background: rgba(0, 0, 0, 0.9);
-      position: relative;
-      bottom: 0;
-      width: 100%;
+      padding: 40px 5%;
+      background: var(--darker-bg);
+      border-top: 1px solid rgba(0, 0, 0, 0.1);
+    }
+
+    footer p {
+      margin-bottom: 15px;
+      color: var(--text);
+    }
+
+    .social-links {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      align-items: center;
     }
 
     .social-links a {
-      color: #fff;
-      margin: 0 10px;
-      font-size: 22px;
-      transition: 0.3s;
+      color: var(--text);
+      font-size: 24px;
+      transition: all 0.3s ease;
     }
 
     .social-links a:hover {
-      color: #04AA6D;
+      color: var(--accent);
+      transform: translateY(-3px);
     }
 
   </style>
@@ -141,23 +129,24 @@
 
   <!-- Navbar -->
   <nav class="navbar">
-    <a href="index.html#home" class="logo"><img src="loogo.png" alt="SD"></a>
+    <a href="index.html#home" class="logo"><img src="https://lh3.google.com/d/1SRvP91erwWsM4ykrWHvK8YNPrTgv8_Cb" alt="SD"></a>
     <ul class="nav-links">
       <li><a href="index.html#home">Home</a></li>
       <li><a href="about2.html">About</a></li>
       <li><a href="index.html#projects">Projects</a></li>
-      <li><a href="index.html#skills">Skills</a></li>
       <li><a href="index.html#experience">Experience</a></li>
-      <li><a href="index.html#education">Education</a></li>
       <li><a href="index.html#certifications">Certifications</a></li>
-      <li><a href="contact.html">Contact Us</a></li>
+      <li><a href="index.html#coding-profiles">Coding Profiles</a></li>
+      <li><a href="#contact">Contact Us</a></li>
     </ul>
   </nav>
 
-  <!-- Form Container -->
-  <div class="container">
-    <h2>Contact Me</h2>
-    <form action="https://api.web3forms.com/submit" method="POST">
+  <!-- Contact Section -->
+  <section class="contact-section">
+    <div class="contact-container">
+      <p class="eyebrow">Get In Touch</p>
+      <h2>Contact Me</h2>
+      <form class="contact-form" action="https://api.web3forms.com/submit" method="POST">
       <input type="hidden" name="access_key" value="7f003844-62a9-4710-8794-2dba98e0029e">
 
       <input type="text" id="fname" name="firstname" placeholder="First Name" required>
@@ -178,15 +167,16 @@
 
       <input type="submit" value="Send Message">
     </form>
-  </div>
+    </div>
+  </section>
 
   <!-- Footer -->
   <footer>
-    <p>&copy; 2024 Saidatta. All rights reserved.</p>
+    <p>&copy; 2026 Sai Datta Manikanta Gowthu. All rights reserved.</p>
     <div class="social-links">
-      <a href="https://www.linkedin.com/in/v-v-satya-sai-datta-manikanta-gowthu-41709b291/"><i class="fa-brands fa-linkedin"></i></a>
-      <a href="https://github.com/gowthusaidatta"><i class="fa-brands fa-github"></i></a>
-      <a href="https://www.instagram.com/crazyboy_datta?igsh=MWx6cHE0Z2k1cnptdA=="><i class="fa-brands fa-instagram"></i></a>
+      <a href="https://www.linkedin.com/in/v-v-satya-sai-datta-manikanta-gowthu-41709b291/" target="_blank" rel="noopener"><i class="fa-brands fa-linkedin"></i></a>
+      <a href="https://github.com/gowthusaidatta" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i></a>
+      <a href="https://www.instagram.com/crazyboy_datta?igsh=MWx6cHE0Z2k1cnptdA==" target="_blank" rel="noopener"><i class="fa-brands fa-instagram"></i></a>
     </div>
   </footer>
 
